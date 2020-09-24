@@ -1,5 +1,5 @@
 ﻿using Discord;
-using Discord.Commands;
+//using Discord.Commands;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ namespace ChannelAdminBot
     public class Program
     {
         private DiscordSocketClient m_Client;
+        private CancellationTokenSource m_Source = new CancellationTokenSource();
 
         public DiscordSocketClient Client
         {
@@ -43,8 +44,17 @@ namespace ChannelAdminBot
             await Client.LoginAsync(Discord.TokenType.Bot, token);
             await Client.StartAsync();
             Client.Ready += Client_Ready;
-            //await Task.Delay(Timeout.Infinite);
-            await Task.Delay(10000);
+            try
+            {
+                await Task.Delay(Timeout.Infinite, m_Source.Token);
+            }
+            catch(TaskCanceledException tce)
+            {
+            }
+            finally
+            {
+                await Client.StopAsync();
+            }
         }
 
         private async Task Client_Ready()
@@ -55,7 +65,7 @@ namespace ChannelAdminBot
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(controller);
-            await Client.StopAsync();
+            m_Source.Cancel();
         }
 
         private async void setMuteStateToAllUsers(string i_ChannelName, bool i_MuteValue)

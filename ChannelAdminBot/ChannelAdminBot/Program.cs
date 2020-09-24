@@ -33,7 +33,14 @@ namespace ChannelAdminBot
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new ChannelAdminController());
 
-            //IMessageChannel i = (IMessageChannel) m_Client.GetChannel((ulong) 11);
+            //await m_Client.GetGroupChannelsAsync();
+            //IReadOnlyCollection<ISocketPrivateChannel> privateChannels = m_Client.GroupChannels;
+
+            Discord.IApplication app = await (m_Client as IDiscordClient).GetApplicationInfoAsync();
+
+            IGuild guild = await (m_Client as IDiscordClient).GetGuildsAsync();
+
+                //IMessageChannel i = (IMessageChannel) m_Client.GetChannel((ulong) 11);
             //await i.SendMessageAsync("Test Message");
 
             await Task.Delay(-1);

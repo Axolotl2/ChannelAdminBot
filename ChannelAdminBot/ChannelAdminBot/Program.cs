@@ -80,7 +80,10 @@ namespace ChannelAdminBot
             guildChannels = await guilds.ToArray()[0].GetChannelsAsync();
             foreach (IGuildChannel channel in guildChannels)
             {
-                comboBoxValues.Add(channel.Name);
+                if(channel is IVoiceChannel)
+                {
+                    comboBoxValues.Add(channel.Name);
+                }
             }
 
             i_Controller.SetComboBoxValues(comboBoxValues);

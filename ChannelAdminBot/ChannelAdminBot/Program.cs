@@ -23,7 +23,8 @@ namespace ChannelAdminBot
         {
             m_Client = new DiscordSocketClient();
             //m_Client.Log += Log;
-            string token = "NzU4NDE3NTAyNDEyNzM0NDk1.X2upVw.59uHkahIGn_yQYJLabSVaolGk6Q";
+
+            string token = Environment.GetEnvironmentVariable("ChannelAdminBotToken", EnvironmentVariableTarget.User);
 
             await m_Client.LoginAsync(Discord.TokenType.Bot, token);
             await m_Client.StartAsync();

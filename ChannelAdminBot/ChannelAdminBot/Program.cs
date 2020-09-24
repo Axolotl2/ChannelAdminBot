@@ -44,7 +44,7 @@ namespace ChannelAdminBot
             await Client.StartAsync();
             Client.Ready += Client_Ready;
             //await Task.Delay(Timeout.Infinite);
-            await Task.Delay(-1);
+            await Task.Delay(10000);
         }
 
         private async Task Client_Ready()

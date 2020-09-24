@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChannelAdminController));
             this.UnmuteAll = new System.Windows.Forms.Button();
             this.MuteAll = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // UnmuteAll
             // 
+            this.UnmuteAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.UnmuteAll.Location = new System.Drawing.Point(121, 12);
             this.UnmuteAll.Name = "UnmuteAll";
             this.UnmuteAll.Size = new System.Drawing.Size(103, 23);
@@ -45,6 +47,7 @@
             // 
             // MuteAll
             // 
+            this.MuteAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.MuteAll.Location = new System.Drawing.Point(12, 12);
             this.MuteAll.Name = "MuteAll";
             this.MuteAll.Size = new System.Drawing.Size(103, 23);
@@ -53,25 +56,30 @@
             this.MuteAll.UseVisualStyleBackColor = true;
             this.MuteAll.Click += new System.EventHandler(this.MuteAll_Click);
             // 
-            // comboBox1
+            // ComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 55);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(212, 21);
-            this.comboBox1.TabIndex = 3;
+            this.ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ComboBox.FormattingEnabled = true;
+            this.ComboBox.Location = new System.Drawing.Point(12, 55);
+            this.ComboBox.Name = "ComboBox";
+            this.ComboBox.Size = new System.Drawing.Size(212, 21);
+            this.ComboBox.TabIndex = 3;
             // 
             // ChannelAdminController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(238, 88);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ComboBox);
             this.Controls.Add(this.MuteAll);
             this.Controls.Add(this.UnmuteAll);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ChannelAdminController";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Discord Mute Controller";
             this.ResumeLayout(false);
 
@@ -80,7 +88,7 @@
         #endregion
         private System.Windows.Forms.Button UnmuteAll;
         private System.Windows.Forms.Button MuteAll;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ComboBox;
     }
 }
 

@@ -35,5 +35,10 @@ namespace ChannelAdminBot
                 UnmutePressed.Invoke("Among us - Public", false);
             }
         }
+
+        public void SetComboBoxValues()
+        {
+
+        }
     }
 }

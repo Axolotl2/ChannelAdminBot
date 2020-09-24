@@ -27,7 +27,7 @@ namespace ChannelAdminBot
 
             if (MutePressed != null)
             {
-                MutePressed.Invoke("Among us - Public", true);
+                MutePressed.Invoke(pickedValue, true);
             }
         }
 
@@ -37,7 +37,7 @@ namespace ChannelAdminBot
 
             if(UnmutePressed != null)
             {
-                UnmutePressed.Invoke("Among us - Public", false);
+                UnmutePressed.Invoke(pickedValue, false);
             }
         }
 

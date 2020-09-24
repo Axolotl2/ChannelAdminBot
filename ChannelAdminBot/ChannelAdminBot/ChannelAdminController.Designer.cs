@@ -1,6 +1,6 @@
 ﻿namespace ChannelAdminBot
 {
-    partial class Form1
+    partial class ChannelAdminController
     {
         /// <summary>
         /// Required designer variable.

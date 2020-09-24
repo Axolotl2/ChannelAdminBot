@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Discord;
+using Discord.WebSocket;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,17 +8,34 @@ using System.Windows.Forms;
 
 namespace ChannelAdminBot
 {
-    static class Program
+    public class Program
     {
+        private DiscordSocketClient m_Client;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main(string[] args)
+            => new Program().MainAsync().GetAwaiter().GetResult();
+
+        public async Task MainAsync()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            m_Client = new DiscordSocketClient();
+            //m_Client.Log += Log;
+            string token = "NzU4NDE3NTAyNDEyNzM0NDk1.X2upVw.59uHkahIGn_yQYJLabSVaolGk6Q";
+
+            await m_Client.LoginAsync(Discord.TokenType.Bot, token);
+            await m_Client.StartAsync();
+
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new ChannelAdminController());
+
+            //IMessageChannel i = (IMessageChannel) m_Client.GetChannel((ulong) 11);
+            //await i.SendMessageAsync("Test Message");
+
+            await Task.Delay(-1);
         }
     }
 }

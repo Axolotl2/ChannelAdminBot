@@ -41,7 +41,7 @@
             this.UnmuteAll.Name = "UnmuteAll";
             this.UnmuteAll.Size = new System.Drawing.Size(103, 23);
             this.UnmuteAll.TabIndex = 1;
-            this.UnmuteAll.Text = "Unmute All";
+            this.UnmuteAll.Text = "UnMute All";
             this.UnmuteAll.UseVisualStyleBackColor = true;
             this.UnmuteAll.Click += new System.EventHandler(this.UnmuteAll_Click);
             // 

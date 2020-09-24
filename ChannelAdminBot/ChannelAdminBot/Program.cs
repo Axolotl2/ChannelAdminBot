@@ -2,6 +2,7 @@
 //using Discord.Commands;
 using Discord.WebSocket;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -62,10 +63,27 @@ namespace ChannelAdminBot
             ChannelAdminController controller = new ChannelAdminController();
             controller.MutePressed += setMuteStateToAllUsers;
             controller.UnmutePressed += setMuteStateToAllUsers;
+            setChannelsComboBoxValues(controller);
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(controller);
             m_Source.Cancel();
+        }
+
+        private async void setChannelsComboBoxValues(ChannelAdminController i_Controller)
+        {
+            IReadOnlyCollection<IGuild> guilds;
+            IReadOnlyCollection<IGuildChannel> guildChannels;
+            List<string> comboBoxValues = new List<string>();
+
+            guilds = await (Client as IDiscordClient).GetGuildsAsync();
+            guildChannels = await guilds.ToArray()[0].GetChannelsAsync();
+            foreach (IGuildChannel channel in guildChannels)
+            {
+                comboBoxValues.Add(channel.Name);
+            }
+
+            i_Controller.SetComboBoxValues(comboBoxValues);
         }
 
         private async void setMuteStateToAllUsers(string i_ChannelName, bool i_MuteValue)
@@ -74,7 +92,7 @@ namespace ChannelAdminBot
             IReadOnlyCollection<IGuildChannel> guildChannels = null;
             IAsyncEnumerable<IReadOnlyCollection<IGuildUser>> guildUsers = null;
 
-            guilds = await(Client as IDiscordClient).GetGuildsAsync();
+            guilds = await (Client as IDiscordClient).GetGuildsAsync();
             guildChannels = await guilds.ToArray()[0].GetChannelsAsync();
             foreach (IGuildChannel channel in guildChannels)
             {

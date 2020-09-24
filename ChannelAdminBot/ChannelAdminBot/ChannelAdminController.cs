@@ -22,6 +22,9 @@ namespace ChannelAdminBot
 
         private void MuteAll_Click(object sender, EventArgs e)
         {
+            //"Among us - Public"
+            string pickedValue = ComboBox.SelectedItem.ToString();
+
             if (MutePressed != null)
             {
                 MutePressed.Invoke("Among us - Public", true);
@@ -30,15 +33,17 @@ namespace ChannelAdminBot
 
         private void UnmuteAll_Click(object sender, EventArgs e)
         {
+            string pickedValue = ComboBox.SelectedItem.ToString();
+
             if(UnmutePressed != null)
             {
                 UnmutePressed.Invoke("Among us - Public", false);
             }
         }
 
-        public void SetComboBoxValues()
+        public void SetComboBoxValues(IList<string> i_Values)
         {
-
+            ComboBox.DataSource = i_Values;
         }
     }
 }

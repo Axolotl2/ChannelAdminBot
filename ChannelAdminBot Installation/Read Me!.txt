@@ -1,0 +1,10 @@
+Hello, we're so glad you decided to use our application!
+
+Don't forget to update the bot's token in the environment variable "ChannelAdminBotToken".
+The installation can do it for you, but in order to change it you may need to uninstall and then install from scratch.
+
+In order to create a new bot to use with this application please visit the following page:
+https://docs.stillu.cc/guides/getting_started/first-bot.html
+
+Thank you for using our software!
+You can find the source code at: https://github.com/Axolotl2/ChannelAdminBot.git

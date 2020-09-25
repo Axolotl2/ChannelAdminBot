@@ -1,1 +1,0 @@
-setx ChannelAdminBotToken "ENTER_YOUR_BOT_TOKEN_HERE"

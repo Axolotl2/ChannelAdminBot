@@ -68,6 +68,7 @@
             this.m_ChannelsComboBox.Name = "m_ChannelsComboBox";
             this.m_ChannelsComboBox.Size = new System.Drawing.Size(212, 21);
             this.m_ChannelsComboBox.TabIndex = 3;
+            this.m_ChannelsComboBox.SelectedIndexChanged += new System.EventHandler(this.m_ChannelsComboBox_SelectedIndexChanged);
             // 
             // m_MuteSelected
             // 
@@ -93,6 +94,7 @@
             // 
             // m_UsersCheckedListBox
             // 
+            this.m_UsersCheckedListBox.CheckOnClick = true;
             this.m_UsersCheckedListBox.FormattingEnabled = true;
             this.m_UsersCheckedListBox.Location = new System.Drawing.Point(12, 133);
             this.m_UsersCheckedListBox.Name = "m_UsersCheckedListBox";

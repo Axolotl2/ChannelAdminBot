@@ -16,6 +16,8 @@ namespace ChannelAdminBot
         public event Action<string, bool> UnMuteAllPressed;
         public event Action<string, List<string>, bool> MuteSelectedPressed;
         public event Action<string, List<string>, bool> UnMuteSelectedPressed;
+        public event Action ChannelPicked;
+        private string m_PickedChannel;
 
         public ChannelAdminController()
         {
@@ -26,7 +28,7 @@ namespace ChannelAdminBot
         {
             get
             {
-                return (m_ChannelsComboBox.SelectedItem as string);
+                return m_PickedChannel;
             }
         }
 
@@ -58,6 +60,7 @@ namespace ChannelAdminBot
 
         public void SetCheckedListBoxValues(List<string> i_Users)
         {
+            m_UsersCheckedListBox.Items.Clear();
             foreach(string user in i_Users)
             {
                 m_UsersCheckedListBox.Items.Add(user);
@@ -104,6 +107,15 @@ namespace ChannelAdminBot
             }
 
             return users;
+        }
+
+        private void m_ChannelsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_PickedChannel = (string)m_ChannelsComboBox.SelectedItem;
+            if (ChannelPicked != null)
+            {
+                ChannelPicked.Invoke();
+            }
         }
     }
 }

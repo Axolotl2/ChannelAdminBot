@@ -14,6 +14,7 @@ namespace ChannelAdminBot
     public class Program
     {
         private DiscordSocketClient m_Client;
+        private ChannelAdminController m_Controller;
         private CancellationTokenSource m_Source = new CancellationTokenSource();
 
         public DiscordSocketClient Client
@@ -60,21 +61,37 @@ namespace ChannelAdminBot
 
         private async Task Client_Ready()
         {
-            ChannelAdminController controller = new ChannelAdminController();
-            controller.MuteAllPressed += setMuteStateToAllUsers;
-            controller.UnMuteAllPressed += setMuteStateToAllUsers;
-            controller.MuteSelectedPressed += setMuteStateToSelectedUsers;
-            controller.UnMuteSelectedPressed += setMuteStateToSelectedUsers;
-            //controller.ChannelPicked 
-            setChannelsComboBoxValues(controller);
-            setUsersListBoxValues(controller);
+            initializeController();
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(controller);
+            Application.Run(m_Controller);
             m_Source.Cancel();
         }
 
-        private async void setChannelsComboBoxValues(ChannelAdminController i_Controller)
+        private void initializeController()
+        {
+            m_Controller = new ChannelAdminController();
+            setChannelsComboBoxValues();
+            setUsersListBoxValues();
+            m_Controller.MuteAllPressed += setMuteStateToAllUsers;
+            m_Controller.UnMuteAllPressed += setMuteStateToAllUsers;
+            m_Controller.MuteSelectedPressed += setMuteStateToSelectedUsers;
+            m_Controller.UnMuteSelectedPressed += setMuteStateToSelectedUsers;
+            m_Controller.ChannelPicked += setUsersListBoxValues;
+            m_Client.UserVoiceStateUpdated += M_Client_UserVoiceStateUpdated;
+        }
+
+        private Task M_Client_UserVoiceStateUpdated(SocketUser arg1, SocketVoiceState arg2, SocketVoiceState arg3)
+        {
+            if(arg2.VoiceChannel.Name.Equals(m_Controller.PickedChannel) || arg3.VoiceChannel.Name.Equals(m_Controller.PickedChannel))
+            {
+                setUsersListBoxValues();
+            }
+
+            return Task.CompletedTask;
+        }
+
+        private async void setChannelsComboBoxValues()
         {
             IReadOnlyCollection<IGuild> guilds;
             IReadOnlyCollection<IGuildChannel> guildChannels;
@@ -90,21 +107,23 @@ namespace ChannelAdminBot
                 }
             }
 
-            i_Controller.SetComboBoxValues(comboBoxValues);
+            m_Controller.SetComboBoxValues(comboBoxValues);
         }
 
-        private async void setUsersListBoxValues(ChannelAdminController i_Controller)
+        private async void setUsersListBoxValues()
         {
             IReadOnlyCollection<IGuild> guilds;
             IReadOnlyCollection<IGuildChannel> guildChannels;
             IAsyncEnumerable<IReadOnlyCollection<IGuildUser>> guildUsers = null;
             List<string> listBoxValues = new List<string>();
+            IReadOnlyCollection<IGuildUser> users;
+            string userNickName;
 
             guilds = await (Client as IDiscordClient).GetGuildsAsync();
             guildChannels = await guilds.ToArray()[0].GetChannelsAsync();
             foreach (IGuildChannel channel in guildChannels)
             {
-                if (channel.Name.Equals(i_Controller.PickedChannel))
+                if (channel.Name.Equals(m_Controller.PickedChannel))
                 {
                     guildUsers = channel.GetUsersAsync();
                 }
@@ -115,10 +134,11 @@ namespace ChannelAdminBot
             {
                 while (await e.MoveNextAsync())
                 {
-                    IReadOnlyCollection<IGuildUser> users = e.Current;
+                    users = e.Current;
                     foreach (IGuildUser user in users)
                     {
-                        listBoxValues.Add(user.Nickname);
+                        userNickName = user.Nickname != null ? user.Nickname : user.Username;
+                        listBoxValues.Add(userNickName);
                     }
                 }
                 //await foreach (IGuildUser user in guildUsers)
@@ -132,7 +152,7 @@ namespace ChannelAdminBot
                 }
             }
 
-            i_Controller.SetCheckedListBoxValues(listBoxValues);
+            m_Controller.SetCheckedListBoxValues(listBoxValues);
         }
 
         private async void setMuteStateToAllUsers(string i_ChannelName, bool i_MuteValue)
@@ -182,6 +202,7 @@ namespace ChannelAdminBot
             IReadOnlyCollection<IGuild> guilds;
             IReadOnlyCollection<IGuildChannel> guildChannels = null;
             IAsyncEnumerable<IReadOnlyCollection<IGuildUser>> guildUsers = null;
+            string userNickName;
 
             guilds = await (Client as IDiscordClient).GetGuildsAsync();
             guildChannels = await guilds.ToArray()[0].GetChannelsAsync();
@@ -201,7 +222,8 @@ namespace ChannelAdminBot
                     IReadOnlyCollection<IGuildUser> users = e.Current;
                     foreach (IGuildUser user in users)
                     {
-                        if (i_Users.Contains(user.Nickname))
+                        userNickName = user.Nickname != null ? user.Nickname : user.Username;
+                        if (i_Users.Contains(userNickName))
                         {
                             if (user.IsMuted != i_MuteValue)
                             {

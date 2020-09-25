@@ -1,1 +1,0 @@
-setx ChannelAdminBotToken "ENTER-BOT-TOKEN-HERE"

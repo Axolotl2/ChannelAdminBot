@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Discord;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +11,8 @@ using System.Windows.Forms;
 
 namespace ChannelAdminBot
 {
+    delegate void SetCheckedListBoxValuedCallBack(List<string> i_Users);
+
     public partial class ChannelAdminController : Form
     {
         public event Action<string, bool> MuteAllPressed;
@@ -47,7 +50,7 @@ namespace ChannelAdminBot
         {
             string pickedValue = m_ChannelsComboBox.SelectedItem.ToString();
 
-            if(UnMuteAllPressed != null)
+            if (UnMuteAllPressed != null)
             {
                 UnMuteAllPressed.Invoke(pickedValue, false);
             }
@@ -60,10 +63,36 @@ namespace ChannelAdminBot
 
         public void SetCheckedListBoxValues(List<string> i_Users)
         {
-            m_UsersCheckedListBox.Items.Clear();
-            foreach(string user in i_Users)
+            SetCheckedListBoxValuedCallBack callBack;
+            List<string> usersToRemove = new List<string>();
+
+            if (m_UsersCheckedListBox.InvokeRequired)
             {
-                m_UsersCheckedListBox.Items.Add(user);
+                callBack = new SetCheckedListBoxValuedCallBack(SetCheckedListBoxValues);
+                Invoke(callBack, new object[] { i_Users });
+            }
+            else
+            {
+                foreach (string user in m_UsersCheckedListBox.Items)
+                {
+                    if (!i_Users.Contains(user))
+                    {
+                        usersToRemove.Add(user);
+                    }
+                }
+
+                foreach (string user in usersToRemove)
+                {
+                    m_UsersCheckedListBox.Items.Remove(user);
+                }
+
+                foreach (string user in i_Users)
+                {
+                    if (!m_UsersCheckedListBox.Items.Contains(user))
+                    {
+                        m_UsersCheckedListBox.Items.Add(user);
+                    }
+                }
             }
         }
 
@@ -101,7 +130,7 @@ namespace ChannelAdminBot
 
             usersCollection = m_UsersCheckedListBox.SelectedItems;
 
-            foreach(object user in usersCollection)
+            foreach (object user in usersCollection)
             {
                 users.Add(user as string);
             }

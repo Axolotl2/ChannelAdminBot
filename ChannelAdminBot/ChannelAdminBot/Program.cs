@@ -83,7 +83,11 @@ namespace ChannelAdminBot
 
         private Task M_Client_UserVoiceStateUpdated(SocketUser arg1, SocketVoiceState arg2, SocketVoiceState arg3)
         {
-            if(arg2.VoiceChannel.Name.Equals(m_Controller.PickedChannel) || arg3.VoiceChannel.Name.Equals(m_Controller.PickedChannel))
+            bool leftSelectedChannel, joinedSelectedChannel;
+
+            leftSelectedChannel = arg2.VoiceChannel != null && arg2.VoiceChannel.Name.Equals(m_Controller.PickedChannel);
+            joinedSelectedChannel = arg3.VoiceChannel != null && arg3.VoiceChannel.Name.Equals(m_Controller.PickedChannel);
+            if (leftSelectedChannel || joinedSelectedChannel)
             {
                 setUsersListBoxValues();
             }

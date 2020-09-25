@@ -64,7 +64,7 @@
             this.m_ChannelsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.m_ChannelsComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.m_ChannelsComboBox.FormattingEnabled = true;
-            this.m_ChannelsComboBox.Location = new System.Drawing.Point(12, 55);
+            this.m_ChannelsComboBox.Location = new System.Drawing.Point(12, 41);
             this.m_ChannelsComboBox.Name = "m_ChannelsComboBox";
             this.m_ChannelsComboBox.Size = new System.Drawing.Size(212, 21);
             this.m_ChannelsComboBox.TabIndex = 3;
@@ -96,16 +96,18 @@
             // 
             this.m_UsersCheckedListBox.CheckOnClick = true;
             this.m_UsersCheckedListBox.FormattingEnabled = true;
-            this.m_UsersCheckedListBox.Location = new System.Drawing.Point(12, 133);
+            this.m_UsersCheckedListBox.Location = new System.Drawing.Point(12, 123);
+            this.m_UsersCheckedListBox.MultiColumn = true;
             this.m_UsersCheckedListBox.Name = "m_UsersCheckedListBox";
-            this.m_UsersCheckedListBox.Size = new System.Drawing.Size(212, 109);
+            this.m_UsersCheckedListBox.Size = new System.Drawing.Size(212, 154);
+            this.m_UsersCheckedListBox.Sorted = true;
             this.m_UsersCheckedListBox.TabIndex = 6;
             // 
             // ChannelAdminController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(238, 262);
+            this.ClientSize = new System.Drawing.Size(238, 287);
             this.Controls.Add(this.m_UsersCheckedListBox);
             this.Controls.Add(this.m_UnMuteSelected);
             this.Controls.Add(this.m_MuteSelected);

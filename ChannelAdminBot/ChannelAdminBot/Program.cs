@@ -20,7 +20,7 @@ namespace ChannelAdminBot
         {
             get
             {
-                if(m_Client == null)
+                if (m_Client == null)
                 {
                     m_Client = new DiscordSocketClient();
                 }
@@ -49,7 +49,7 @@ namespace ChannelAdminBot
             {
                 await Task.Delay(Timeout.Infinite, m_Source.Token);
             }
-            catch(TaskCanceledException tce)
+            catch (TaskCanceledException tce)
             {
             }
             finally
@@ -61,9 +61,13 @@ namespace ChannelAdminBot
         private async Task Client_Ready()
         {
             ChannelAdminController controller = new ChannelAdminController();
-            controller.MutePressed += setMuteStateToAllUsers;
-            controller.UnmutePressed += setMuteStateToAllUsers;
+            controller.MuteAllPressed += setMuteStateToAllUsers;
+            controller.UnMuteAllPressed += setMuteStateToAllUsers;
+            controller.MuteSelectedPressed += setMuteStateToSelectedUsers;
+            controller.UnMuteSelectedPressed += setMuteStateToSelectedUsers;
+            //controller.ChannelPicked 
             setChannelsComboBoxValues(controller);
+            setUsersListBoxValues(controller);
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(controller);
@@ -80,13 +84,55 @@ namespace ChannelAdminBot
             guildChannels = await guilds.ToArray()[0].GetChannelsAsync();
             foreach (IGuildChannel channel in guildChannels)
             {
-                if(channel is IVoiceChannel)
+                if (channel is IVoiceChannel)
                 {
                     comboBoxValues.Add(channel.Name);
                 }
             }
 
             i_Controller.SetComboBoxValues(comboBoxValues);
+        }
+
+        private async void setUsersListBoxValues(ChannelAdminController i_Controller)
+        {
+            IReadOnlyCollection<IGuild> guilds;
+            IReadOnlyCollection<IGuildChannel> guildChannels;
+            IAsyncEnumerable<IReadOnlyCollection<IGuildUser>> guildUsers = null;
+            List<string> listBoxValues = new List<string>();
+
+            guilds = await (Client as IDiscordClient).GetGuildsAsync();
+            guildChannels = await guilds.ToArray()[0].GetChannelsAsync();
+            foreach (IGuildChannel channel in guildChannels)
+            {
+                if (channel.Name.Equals(i_Controller.PickedChannel))
+                {
+                    guildUsers = channel.GetUsersAsync();
+                }
+            }
+
+            IAsyncEnumerator<IReadOnlyCollection<IGuildUser>> e = guildUsers.GetAsyncEnumerator();
+            try
+            {
+                while (await e.MoveNextAsync())
+                {
+                    IReadOnlyCollection<IGuildUser> users = e.Current;
+                    foreach (IGuildUser user in users)
+                    {
+                        listBoxValues.Add(user.Nickname);
+                    }
+                }
+                //await foreach (IGuildUser user in guildUsers)
+                //    (user as IGuildUser).ModifyAsync(props => props.Mute = true);
+            }
+            finally
+            {
+                if (e != null)
+                {
+                    await e.DisposeAsync();
+                }
+            }
+
+            i_Controller.SetCheckedListBoxValues(listBoxValues);
         }
 
         private async void setMuteStateToAllUsers(string i_ChannelName, bool i_MuteValue)
@@ -113,7 +159,55 @@ namespace ChannelAdminBot
                     IReadOnlyCollection<IGuildUser> users = e.Current;
                     foreach (IGuildUser user in users)
                     {
-                        user.ModifyAsync(props => props.Mute = i_MuteValue);
+                        if (user.IsMuted != i_MuteValue)
+                        {
+                            user.ModifyAsync(props => props.Mute = i_MuteValue);
+                        }
+                    }
+                }
+                //await foreach (IGuildUser user in guildUsers)
+                //    (user as IGuildUser).ModifyAsync(props => props.Mute = true);
+            }
+            finally
+            {
+                if (e != null)
+                {
+                    await e.DisposeAsync();
+                }
+            }
+        }
+
+        private async void setMuteStateToSelectedUsers(string i_ChannelName, List<string> i_Users, bool i_MuteValue)
+        {
+            IReadOnlyCollection<IGuild> guilds;
+            IReadOnlyCollection<IGuildChannel> guildChannels = null;
+            IAsyncEnumerable<IReadOnlyCollection<IGuildUser>> guildUsers = null;
+
+            guilds = await (Client as IDiscordClient).GetGuildsAsync();
+            guildChannels = await guilds.ToArray()[0].GetChannelsAsync();
+            foreach (IGuildChannel channel in guildChannels)
+            {
+                if (channel.Name.Equals(i_ChannelName))
+                {
+                    guildUsers = channel.GetUsersAsync();
+                }
+            }
+
+            IAsyncEnumerator<IReadOnlyCollection<IGuildUser>> e = guildUsers.GetAsyncEnumerator();
+            try
+            {
+                while (await e.MoveNextAsync())
+                {
+                    IReadOnlyCollection<IGuildUser> users = e.Current;
+                    foreach (IGuildUser user in users)
+                    {
+                        if (i_Users.Contains(user.Nickname))
+                        {
+                            if (user.IsMuted != i_MuteValue)
+                            {
+                                user.ModifyAsync(props => props.Mute = i_MuteValue);
+                            }
+                        }
                     }
                 }
                 //await foreach (IGuildUser user in guildUsers)

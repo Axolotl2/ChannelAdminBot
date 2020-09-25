@@ -1,1 +1,0 @@
-setx ChannelAdminBotToken "NzU4NDE3NTAyNDEyNzM0NDk1.X2upVw.yaeo6zKPthlpN1t47BuarXf-G4A"

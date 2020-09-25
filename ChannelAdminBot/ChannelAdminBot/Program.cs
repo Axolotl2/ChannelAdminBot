@@ -113,7 +113,7 @@ namespace ChannelAdminBot
                     IReadOnlyCollection<IGuildUser> users = e.Current;
                     foreach (IGuildUser user in users)
                     {
-                        await user.ModifyAsync(props => props.Mute = i_MuteValue);
+                        user.ModifyAsync(props => props.Mute = i_MuteValue);
                     }
                 }
                 //await foreach (IGuildUser user in guildUsers)

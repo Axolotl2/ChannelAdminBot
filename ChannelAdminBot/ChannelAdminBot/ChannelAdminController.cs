@@ -45,5 +45,10 @@ namespace ChannelAdminBot
         {
             ComboBox.DataSource = i_Values;
         }
+
+        private void ChannelAdminController_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            return;
+        }
     }
 }

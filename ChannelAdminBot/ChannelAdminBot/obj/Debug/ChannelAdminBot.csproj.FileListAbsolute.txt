@@ -58,7 +58,6 @@ C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdmin
 C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\bin\Debug\System.Linq.Async.xml
 C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\obj\Debug\ChannelAdminBot.csprojAssemblyReference.cache
 C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\obj\Debug\ChannelAdminBot.Properties.Resources.resources
 C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\obj\Debug\ChannelAdminBot.csproj.GenerateResource.cache
 C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\obj\Debug\ChannelAdminBot.csproj.CoreCompileInputs.cache

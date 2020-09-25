@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelAdminBot", "ChannelAdminBot\ChannelAdminBot.csproj", "{6D698C75-A413-439B-8B39-BC696FC037B5}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ChannelAdminBotInstaller", "ChannelAdminBotInstaller\ChannelAdminBotInstaller.vdproj", "{3B03A585-56A9-4BC1-B989-DE96AA8A9078}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{6D698C75-A413-439B-8B39-BC696FC037B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D698C75-A413-439B-8B39-BC696FC037B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D698C75-A413-439B-8B39-BC696FC037B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B03A585-56A9-4BC1-B989-DE96AA8A9078}.Debug|Any CPU.ActiveCfg = Debug
+		{3B03A585-56A9-4BC1-B989-DE96AA8A9078}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

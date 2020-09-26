@@ -34,12 +34,23 @@ namespace ChannelAdminBot
         {
             string token;
 
-            //m_Client.Log += Log;
-            token = Environment.GetEnvironmentVariable("ChannelAdminBotToken", EnvironmentVariableTarget.User);
-            await Client.LoginAsync(Discord.TokenType.Bot, token);
-            await Client.StartAsync();
-            Client.Ready += Client_Ready;
-            await handleBotKeepAlive();
+            try
+            {
+                //m_Client.Log += Log;
+                token = Environment.GetEnvironmentVariable("ChannelAdminBotToken", EnvironmentVariableTarget.User);
+                await Client.LoginAsync(Discord.TokenType.Bot, token);
+                await Client.StartAsync();
+                Client.Ready += Client_Ready;
+                await handleBotKeepAlive();
+            }
+            catch (Discord.Net.HttpException)
+            {
+                MessageBox.Show(
+                    @"Invalid bot token exists,
+Please update 'ChannelAdminBotToken' with the valid token,
+or reinstall this application with the valid token!",
+                    "Login Failed");
+            }
         }
 
         private async Task handleBotKeepAlive()

@@ -47,8 +47,8 @@ namespace ChannelAdminBot
             {
                 MessageBox.Show(
                     @"Invalid bot token exists,
-Please update 'ChannelAdminBotToken' with the valid token,
-or reinstall this application with the valid token!",
+Please reinstall Discord Mute Controller with the valid token!
+or update the 'ChannelAdminBotToken' environment variable with the valid token",
                     "Login Failed");
             }
         }

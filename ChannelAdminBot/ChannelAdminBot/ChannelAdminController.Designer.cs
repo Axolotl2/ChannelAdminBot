@@ -41,8 +41,9 @@
             // m_UnMuteAll
             // 
             this.m_UnMuteAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.m_UnMuteAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_UnMuteAll.Location = new System.Drawing.Point(161, 15);
-            this.m_UnMuteAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.m_UnMuteAll.Margin = new System.Windows.Forms.Padding(4);
             this.m_UnMuteAll.Name = "m_UnMuteAll";
             this.m_UnMuteAll.Size = new System.Drawing.Size(137, 28);
             this.m_UnMuteAll.TabIndex = 1;
@@ -53,8 +54,9 @@
             // m_MuteAll
             // 
             this.m_MuteAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.m_MuteAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_MuteAll.Location = new System.Drawing.Point(16, 15);
-            this.m_MuteAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.m_MuteAll.Margin = new System.Windows.Forms.Padding(4);
             this.m_MuteAll.Name = "m_MuteAll";
             this.m_MuteAll.Size = new System.Drawing.Size(137, 28);
             this.m_MuteAll.TabIndex = 0;
@@ -64,11 +66,13 @@
             // 
             // m_ChannelsComboBox
             // 
+            this.m_ChannelsComboBox.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.m_ChannelsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.m_ChannelsComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.m_ChannelsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_ChannelsComboBox.FormattingEnabled = true;
             this.m_ChannelsComboBox.Location = new System.Drawing.Point(17, 83);
-            this.m_ChannelsComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.m_ChannelsComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.m_ChannelsComboBox.Name = "m_ChannelsComboBox";
             this.m_ChannelsComboBox.Size = new System.Drawing.Size(281, 24);
             this.m_ChannelsComboBox.TabIndex = 3;
@@ -77,8 +81,9 @@
             // m_MuteSelected
             // 
             this.m_MuteSelected.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.m_MuteSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_MuteSelected.Location = new System.Drawing.Point(16, 116);
-            this.m_MuteSelected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.m_MuteSelected.Margin = new System.Windows.Forms.Padding(4);
             this.m_MuteSelected.Name = "m_MuteSelected";
             this.m_MuteSelected.Size = new System.Drawing.Size(137, 28);
             this.m_MuteSelected.TabIndex = 4;
@@ -89,8 +94,9 @@
             // m_UnMuteSelected
             // 
             this.m_UnMuteSelected.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.m_UnMuteSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_UnMuteSelected.Location = new System.Drawing.Point(161, 116);
-            this.m_UnMuteSelected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.m_UnMuteSelected.Margin = new System.Windows.Forms.Padding(4);
             this.m_UnMuteSelected.Name = "m_UnMuteSelected";
             this.m_UnMuteSelected.Size = new System.Drawing.Size(137, 28);
             this.m_UnMuteSelected.TabIndex = 5;
@@ -100,10 +106,13 @@
             // 
             // m_UsersCheckedListBox
             // 
+            this.m_UsersCheckedListBox.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.m_UsersCheckedListBox.CheckOnClick = true;
+            this.m_UsersCheckedListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_UsersCheckedListBox.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.m_UsersCheckedListBox.FormattingEnabled = true;
             this.m_UsersCheckedListBox.Location = new System.Drawing.Point(16, 151);
-            this.m_UsersCheckedListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.m_UsersCheckedListBox.Margin = new System.Windows.Forms.Padding(4);
             this.m_UsersCheckedListBox.MultiColumn = true;
             this.m_UsersCheckedListBox.Name = "m_UsersCheckedListBox";
             this.m_UsersCheckedListBox.Size = new System.Drawing.Size(281, 174);
@@ -112,8 +121,10 @@
             // 
             // m_GuildsComboBox
             // 
+            this.m_GuildsComboBox.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.m_GuildsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.m_GuildsComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.m_GuildsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_GuildsComboBox.FormattingEnabled = true;
             this.m_GuildsComboBox.Location = new System.Drawing.Point(17, 51);
             this.m_GuildsComboBox.Margin = new System.Windows.Forms.Padding(4);
@@ -126,6 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(317, 353);
             this.Controls.Add(this.m_GuildsComboBox);
             this.Controls.Add(this.m_UsersCheckedListBox);
@@ -136,7 +148,7 @@
             this.Controls.Add(this.m_UnMuteAll);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ChannelAdminController";

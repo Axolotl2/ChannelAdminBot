@@ -69,11 +69,13 @@ namespace ChannelAdminBot
 
         public void SetChannelsComboBoxValues(IList<string> i_Values)
         {
+            (i_Values as List<string>).Sort();
             m_ChannelsComboBox.DataSource = i_Values;
         }
 
         public void SetGuildsComboBoxValues(IList<string> i_Values)
         {
+            (i_Values as List<string>).Sort();
             m_GuildsComboBox.DataSource = i_Values;
         }
 

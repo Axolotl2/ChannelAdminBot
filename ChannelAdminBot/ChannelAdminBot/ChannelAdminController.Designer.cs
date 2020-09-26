@@ -57,7 +57,7 @@
             this.m_MuteAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.m_MuteAll.Name = "m_MuteAll";
             this.m_MuteAll.Size = new System.Drawing.Size(137, 28);
-            this.m_MuteAll.TabIndex = 2;
+            this.m_MuteAll.TabIndex = 0;
             this.m_MuteAll.Text = "Mute All";
             this.m_MuteAll.UseVisualStyleBackColor = true;
             this.m_MuteAll.Click += new System.EventHandler(this.MuteAll_Click);
@@ -119,7 +119,7 @@
             this.m_GuildsComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.m_GuildsComboBox.Name = "m_GuildsComboBox";
             this.m_GuildsComboBox.Size = new System.Drawing.Size(281, 24);
-            this.m_GuildsComboBox.TabIndex = 7;
+            this.m_GuildsComboBox.TabIndex = 2;
             this.m_GuildsComboBox.SelectedIndexChanged += new System.EventHandler(this.m_GuildsComboBox_SelectedIndexChanged);
             // 
             // ChannelAdminController

@@ -68,13 +68,15 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token",
             }
         }
 
-        private async Task Client_Ready()
+        private Task Client_Ready()
         {
             initializeController();
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(m_Controller);
             m_Source.Cancel();
+
+            return Task.CompletedTask;
         }
 
         private void initializeController()

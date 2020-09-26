@@ -15,11 +15,13 @@ namespace ChannelAdminBot
 
     public partial class ChannelAdminController : Form
     {
-        public event Action<string, bool> MuteAllPressed;
-        public event Action<string, bool> UnMuteAllPressed;
-        public event Action<string, List<string>, bool> MuteSelectedPressed;
-        public event Action<string, List<string>, bool> UnMuteSelectedPressed;
+        public event Action<string, string, bool> MuteAllPressed;
+        public event Action<string, string, bool> UnMuteAllPressed;
+        public event Action<string, string, List<string>, bool> MuteSelectedPressed;
+        public event Action<string, string, List<string>, bool> UnMuteSelectedPressed;
+        public event Action GuildPicked;
         public event Action ChannelPicked;
+        private string m_PickedGuild;
         private string m_PickedChannel;
 
         public ChannelAdminController()
@@ -35,30 +37,44 @@ namespace ChannelAdminBot
             }
         }
 
+        public string PickedGuild
+        {
+            get
+            {
+                return m_PickedGuild;
+            }
+        }
+
         private void MuteAll_Click(object sender, EventArgs e)
         {
-            //"Among us - Public"
-            string pickedValue = m_ChannelsComboBox.SelectedItem.ToString();
+            string pickedGuild = PickedGuild;
+            string pickedChannel = PickedChannel;
 
             if (MuteAllPressed != null)
             {
-                MuteAllPressed.Invoke(pickedValue, true);
+                MuteAllPressed.Invoke(pickedGuild, pickedChannel, true);
             }
         }
 
         private void UnMuteAll_Click(object sender, EventArgs e)
         {
-            string pickedValue = m_ChannelsComboBox.SelectedItem.ToString();
+            string pickedGuild = PickedGuild;
+            string pickedChannel = PickedChannel;
 
             if (UnMuteAllPressed != null)
             {
-                UnMuteAllPressed.Invoke(pickedValue, false);
+                UnMuteAllPressed.Invoke(pickedGuild, pickedChannel, false);
             }
         }
 
-        public void SetComboBoxValues(IList<string> i_Values)
+        public void SetChannelsComboBoxValues(IList<string> i_Values)
         {
             m_ChannelsComboBox.DataSource = i_Values;
+        }
+
+        public void SetGuildsComboBoxValues(IList<string> i_Values)
+        {
+            m_GuildsComboBox.DataSource = i_Values;
         }
 
         public void SetCheckedListBoxValues(List<string> i_Users)
@@ -103,23 +119,25 @@ namespace ChannelAdminBot
 
         private void MuteSelected_Click(object sender, EventArgs e)
         {
-            string pickedValue = m_ChannelsComboBox.SelectedItem.ToString();
+            string pickedGuild = PickedGuild;
+            string pickedChannel = PickedChannel;
             List<string> users = getSelectedUsers();
 
             if (MuteSelectedPressed != null)
             {
-                MuteSelectedPressed.Invoke(pickedValue, users, true);
+                MuteSelectedPressed.Invoke(pickedGuild, pickedChannel, users, true);
             }
         }
 
         private void UnMuteSelected_Click(object sender, EventArgs e)
         {
-            string pickedValue = m_ChannelsComboBox.SelectedItem.ToString();
+            string pickedGuild = PickedGuild;
+            string pickedChannel = PickedChannel;
             List<string> users = getSelectedUsers();
 
             if (UnMuteSelectedPressed != null)
             {
-                UnMuteSelectedPressed.Invoke(pickedValue, users, false);
+                UnMuteSelectedPressed.Invoke(pickedGuild, pickedChannel, users, false);
             }
         }
 
@@ -129,7 +147,6 @@ namespace ChannelAdminBot
             ListBox.SelectedObjectCollection usersCollection;
 
             usersCollection = m_UsersCheckedListBox.SelectedItems;
-
             foreach (object user in usersCollection)
             {
                 users.Add(user as string);
@@ -144,6 +161,15 @@ namespace ChannelAdminBot
             if (ChannelPicked != null)
             {
                 ChannelPicked.Invoke();
+            }
+        }
+
+        private void m_GuildsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_PickedGuild = (string)m_GuildsComboBox.SelectedItem;
+            if (GuildPicked != null)
+            {
+                GuildPicked.Invoke();
             }
         }
     }

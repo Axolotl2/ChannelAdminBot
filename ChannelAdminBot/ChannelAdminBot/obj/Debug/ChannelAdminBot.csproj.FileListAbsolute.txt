@@ -67,3 +67,4 @@ C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdmin
 C:\Users\Idan\source\repos\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\obj\Debug\ChannelAdminBot.ChannelAdminController.resources
 C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\obj\Debug\ChannelAdminBot.ChannelAdminController.resources
 C:\Users\Idan\source\repos\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\obj\Debug\ChannelAdminBot.csprojAssemblyReference.cache
+C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\obj\Debug\ChannelAdminBot.csprojAssemblyReference.cache

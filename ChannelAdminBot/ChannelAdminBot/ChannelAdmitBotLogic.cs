@@ -93,6 +93,25 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token",
             m_Controller.GuildPicked += setUsersListBoxValues;
             m_Controller.ChannelPicked += setUsersListBoxValues;
             m_Client.UserVoiceStateUpdated += M_Client_UserVoiceStateUpdated;
+            m_Client.GuildMemberUpdated += M_Client_GuildMemberUpdated;
+        }
+
+        private Task M_Client_GuildMemberUpdated(SocketUser arg1, SocketUser arg2)
+        {
+            string oldNickname, newNickname;
+            bool nickNameDeleted, nickNameCreated, nickNameChanged;
+
+            oldNickname = (arg1 as IGuildUser).Nickname;
+            newNickname = (arg2 as IGuildUser).Nickname;
+            nickNameDeleted = oldNickname != null && newNickname == null;
+            nickNameCreated = oldNickname == null && newNickname != null;
+            nickNameChanged = oldNickname != null && !oldNickname.Equals(newNickname);
+            if (nickNameDeleted || nickNameCreated || nickNameChanged)
+            {
+                setUsersListBoxValues();
+            }
+
+            return Task.CompletedTask;
         }
 
         private Task M_Client_UserVoiceStateUpdated(SocketUser arg1, SocketVoiceState arg2, SocketVoiceState arg3)

@@ -4,7 +4,9 @@ using Discord.WebSocket;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +18,8 @@ namespace ChannelAdminBot
         private DiscordSocketClient m_Client;
         private ChannelAdminController m_Controller;
         private CancellationTokenSource m_Source = new CancellationTokenSource();
+        private System.Windows.Forms.Timer m_LogTimer = new System.Windows.Forms.Timer();
+        private StringBuilder m_LogString = new StringBuilder();
 
         public DiscordSocketClient Client
         {
@@ -36,6 +40,9 @@ namespace ChannelAdminBot
 
             try
             {
+                m_LogTimer.Tick += M_LogTimer_Tick;
+                m_LogTimer.Interval = 20000;
+                m_LogTimer.Start();
                 //m_Client.Log += Log;
                 token = Environment.GetEnvironmentVariable("ChannelAdminBotToken", EnvironmentVariableTarget.User);
                 await Client.LoginAsync(Discord.TokenType.Bot, token);
@@ -43,14 +50,29 @@ namespace ChannelAdminBot
                 Client.Ready += Client_Ready;
                 await handleBotKeepAlive();
             }
-            catch (Discord.Net.HttpException)
+            catch (Discord.Net.HttpException he)
             {
-                MessageBox.Show(
+                string message = 
                     @"Invalid bot token exists,
 Please reinstall Discord Mute Controller with the valid token!
-or update the 'ChannelAdminBotToken' environment variable with the valid token",
-                    "Login Failed");
+or update the 'ChannelAdminBotToken' environment variable with the valid token";
+
+                m_LogString.AppendLine(he.Message);
+                m_LogString.AppendLine(he.ToString());
+                writeLogStringToFile();
+                MessageBox.Show(message, "Login Failed");
             }
+        }
+
+        private void M_LogTimer_Tick(object sender, EventArgs e)
+        {
+            writeLogStringToFile();
+        }
+
+        private void writeLogStringToFile()
+        {
+            File.AppendAllText("log.txt", m_LogString.ToString());
+            m_LogString.Clear();
         }
 
         private async Task handleBotKeepAlive()
@@ -64,6 +86,8 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token",
             }
             finally
             {
+                m_LogTimer.Stop();
+                writeLogStringToFile();
                 await Client.StopAsync();
             }
         }

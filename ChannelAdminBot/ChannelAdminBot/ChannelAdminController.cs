@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,6 @@ namespace ChannelAdminBot
         private string m_PickedGuild;
         private string m_PickedChannel;
 
-        public ChannelAdminController()
-        {
-            InitializeComponent();
-        }
-
         public string PickedChannel
         {
             get
@@ -45,26 +41,9 @@ namespace ChannelAdminBot
             }
         }
 
-        private void MuteAll_Click(object sender, EventArgs e)
+        public ChannelAdminController()
         {
-            string pickedGuild = PickedGuild;
-            string pickedChannel = PickedChannel;
-
-            if (MuteAllPressed != null)
-            {
-                MuteAllPressed.Invoke(pickedGuild, pickedChannel, true);
-            }
-        }
-
-        private void UnMuteAll_Click(object sender, EventArgs e)
-        {
-            string pickedGuild = PickedGuild;
-            string pickedChannel = PickedChannel;
-
-            if (UnMuteAllPressed != null)
-            {
-                UnMuteAllPressed.Invoke(pickedGuild, pickedChannel, false);
-            }
+            InitializeComponent();
         }
 
         public void SetChannelsComboBoxValues(IList<string> i_Values)
@@ -111,6 +90,28 @@ namespace ChannelAdminBot
                         m_UsersCheckedListBox.Items.Add(user);
                     }
                 }
+            }
+        }
+
+        private void MuteAll_Click(object sender, EventArgs e)
+        {
+            string pickedGuild = PickedGuild;
+            string pickedChannel = PickedChannel;
+
+            if (MuteAllPressed != null)
+            {
+                MuteAllPressed.Invoke(pickedGuild, pickedChannel, true);
+            }
+        }
+
+        private void UnMuteAll_Click(object sender, EventArgs e)
+        {
+            string pickedGuild = PickedGuild;
+            string pickedChannel = PickedChannel;
+
+            if (UnMuteAllPressed != null)
+            {
+                UnMuteAllPressed.Invoke(pickedGuild, pickedChannel, false);
             }
         }
 

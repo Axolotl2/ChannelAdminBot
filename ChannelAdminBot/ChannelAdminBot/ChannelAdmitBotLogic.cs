@@ -52,7 +52,7 @@ namespace ChannelAdminBot
             }
             catch (Discord.Net.HttpException he)
             {
-                string message = 
+                string message =
                     @"Invalid bot token exists,
 Please reinstall Discord Mute Controller with the valid token!
 or update the 'ChannelAdminBotToken' environment variable with the valid token";
@@ -71,8 +71,15 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token";
 
         private void writeLogStringToFile()
         {
-            File.AppendAllText("log.txt", m_LogString.ToString());
-            m_LogString.Clear();
+            StringBuilder stringLog = new StringBuilder();
+
+            if (m_LogString.Length > 0)
+            {
+                stringLog.AppendLine(String.Format("Log dump at: {0}", DateTime.Now.ToString()));
+                stringLog.AppendLine(m_LogString.ToString());
+                File.AppendAllText("log.txt", stringLog.ToString());
+                m_LogString.Clear();
+            }
         }
 
         private async Task handleBotKeepAlive()

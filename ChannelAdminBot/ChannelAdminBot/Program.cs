@@ -2,7 +2,6 @@
 
 namespace ChannelAdminBot
 {
-    //TODO LIST: 1. listen to nickname change 
     public class Program
     {
 

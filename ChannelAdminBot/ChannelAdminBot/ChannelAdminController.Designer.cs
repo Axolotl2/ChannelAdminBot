@@ -40,6 +40,7 @@
             // 
             // m_UnMuteAll
             // 
+            this.m_UnMuteAll.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_UnMuteAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.m_UnMuteAll.Font = new System.Drawing.Font("Sitka Small", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_UnMuteAll.ForeColor = System.Drawing.SystemColors.Menu;
@@ -54,6 +55,7 @@
             // 
             // m_MuteAll
             // 
+            this.m_MuteAll.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_MuteAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.m_MuteAll.Font = new System.Drawing.Font("Sitka Small", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_MuteAll.ForeColor = System.Drawing.SystemColors.Menu;
@@ -69,6 +71,7 @@
             // m_ChannelsComboBox
             // 
             this.m_ChannelsComboBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.m_ChannelsComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_ChannelsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.m_ChannelsComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.m_ChannelsComboBox.Font = new System.Drawing.Font("Sitka Small", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -82,6 +85,7 @@
             // 
             // m_MuteSelected
             // 
+            this.m_MuteSelected.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_MuteSelected.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.m_MuteSelected.Font = new System.Drawing.Font("Sitka Small", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_MuteSelected.ForeColor = System.Drawing.SystemColors.Menu;
@@ -96,6 +100,7 @@
             // 
             // m_UnMuteSelected
             // 
+            this.m_UnMuteSelected.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_UnMuteSelected.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.m_UnMuteSelected.Font = new System.Drawing.Font("Sitka Small", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_UnMuteSelected.ForeColor = System.Drawing.SystemColors.Menu;
@@ -112,6 +117,7 @@
             // 
             this.m_UsersCheckedListBox.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.m_UsersCheckedListBox.CheckOnClick = true;
+            this.m_UsersCheckedListBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_UsersCheckedListBox.Font = new System.Drawing.Font("Sitka Small", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_UsersCheckedListBox.ForeColor = System.Drawing.SystemColors.Menu;
             this.m_UsersCheckedListBox.FormattingEnabled = true;
@@ -125,6 +131,7 @@
             // m_GuildsComboBox
             // 
             this.m_GuildsComboBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.m_GuildsComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_GuildsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.m_GuildsComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.m_GuildsComboBox.Font = new System.Drawing.Font("Sitka Small", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

@@ -112,6 +112,11 @@ namespace ChannelAdminBot
             r_LogString.AppendLine("Program has ended");
             StopLogging();
         }
+        public void LogClientDisconnected()
+        {
+            r_LogString.AppendLine("The connection between discord and the application ended");
+            StopLogging();
+        }
 
         public void LogGuildsLoaded()
         {

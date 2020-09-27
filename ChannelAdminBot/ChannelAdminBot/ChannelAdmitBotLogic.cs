@@ -45,6 +45,7 @@ namespace ChannelAdminBot
                 await Client.LoginAsync(Discord.TokenType.Bot, token);
                 await Client.StartAsync();
                 Client.Ready += Client_Ready;
+                Client.Disconnected += Client_Disconnected;
                 await handleBotKeepAlive();
             }
             catch (Discord.Net.HttpException he)
@@ -57,6 +58,14 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token";
                 m_Log.LogLoginFailed(he);
                 MessageBox.Show(message, "Login Failed");
             }
+        }
+
+        private async Task Client_Disconnected(Exception arg)
+        {
+            m_Log.LogClientDisconnected();
+            MessageBox.Show("The connection between discord and the application ended", "Client Disconnected");
+            await Client.StopAsync();
+            m_Controller.Close();
         }
 
         private async Task handleBotKeepAlive()

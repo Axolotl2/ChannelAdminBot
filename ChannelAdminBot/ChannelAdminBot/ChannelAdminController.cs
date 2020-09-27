@@ -175,5 +175,10 @@ namespace ChannelAdminBot
                 GuildPicked.Invoke();
             }
         }
+
+        private void ChannelAdminController_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

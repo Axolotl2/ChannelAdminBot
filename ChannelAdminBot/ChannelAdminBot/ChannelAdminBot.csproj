@@ -90,6 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChannelAdminBotLog.cs" />
     <Compile Include="ChannelAdminController.cs">
       <SubType>Form</SubType>
     </Compile>

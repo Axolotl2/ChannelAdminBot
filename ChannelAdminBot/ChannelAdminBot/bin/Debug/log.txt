@@ -202,3 +202,91 @@ Discord.Net.HttpException: The server responded with error 401: 401: Unauthorize
    at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
    at ChannelAdminBot.ChannelAdmitBotLogic.<RunAsync>d__7.MoveNext() in C:\Users\Idan\Source\Repos\Axolotl2\ChannelAdminBot\ChannelAdminBot\ChannelAdminBot\ChannelAdmitBotLogic.cs:line 48
 
+Log dump at: 27/09/2020 16:17:53
+Guilds loaded
+Channels loaded
+Users loaded
+attempted to massivly change mute state of all users at guild Axolot's server channel General to True
+MuteAll button pressed
+attempted to massivly change mute state of all users at guild Axolot's server channel General to False
+UnMuteAll button pressed
+attempted to massivly change mute state of selected users at guild Axolot's server channel General to True
+MuteSelected button pressed
+attempted to massivly change mute state of selected users at guild Axolot's server channel General to False
+UnMuteSelected button pressed
+Users loaded
+Channel AFK picked from the channel list
+Channels loaded
+Users loaded
+Guild TeamX5 picked from the guild list
+Users loaded
+Channel Among us - Public picked from the channel list
+Users loaded
+attempted to massivly change mute state of all users at guild TeamX5 channel Among us - Public to True
+attempted to change mute state of user Idan to True
+MuteAll button pressed
+Users loaded
+The attempt to change mute state of user Idan to True succeeded
+attempted to massivly change mute state of all users at guild TeamX5 channel Among us - Public to False
+attempted to change mute state of user Idan to False
+UnMuteAll button pressed
+Users loaded
+The attempt to change mute state of user Idan to False succeeded
+attempted to massivly change mute state of selected users at guild TeamX5 channel Among us - Public to True
+attempted to change mute state of user Idan to True
+MuteSelected button pressed
+Users loaded
+The attempt to change mute state of user Idan to True succeeded
+attempted to massivly change mute state of selected users at guild TeamX5 channel Among us - Public to False
+attempted to change mute state of user Idan to False
+UnMuteSelected button pressed
+Users loaded
+The attempt to change mute state of user Idan to False succeeded
+Program has ended
+
+Log dump at: 27/09/2020 16:26:04
+Guilds loaded
+Channels loaded
+Users loaded
+Users loaded
+Channel AFK picked from the channel list
+Channels loaded
+Users loaded
+Guild TeamX5 picked from the guild list
+Users loaded
+Channel Among us - Public picked from the channel list
+attempted to massivly change mute state of all users at guild TeamX5 channel Among us - Public to True
+attempted to change mute state of user Idan to True
+MuteAll button pressed
+The attempt to change mute state of user Idan to True failed
+attempted to massivly change mute state of all users at guild TeamX5 channel Among us - Public to True
+attempted to change mute state of user Idan to True
+MuteAll button pressed
+The attempt to change mute state of user Idan to True failed
+Program has ended
+
+Log dump at: 27/09/2020 17:21:22
+Guild Axolot's server picked from the guild list
+Guilds loaded
+Channel General picked from the channel list
+Channels loaded
+Users loaded
+Guild TeamX5 picked from the guild list
+Channel AFK picked from the channel list
+Users loaded
+Channels loaded
+Users loaded
+Channel Among us - Public picked from the channel list
+Users loaded
+MuteAll button pressed
+attempted to massivly change mute state of all users at guild TeamX5 channel Among us - Public to True
+attempted to change mute state of user Idan to True
+Users loaded
+The attempt to change mute state of user Idan to True succeeded
+UnMuteAll button pressed
+attempted to massivly change mute state of all users at guild TeamX5 channel Among us - Public to False
+attempted to change mute state of user Idan to False
+Users loaded
+The attempt to change mute state of user Idan to False succeeded
+Program has ended
+

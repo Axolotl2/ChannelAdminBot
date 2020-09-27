@@ -4,7 +4,6 @@ using Discord.WebSocket;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -18,8 +17,7 @@ namespace ChannelAdminBot
         private DiscordSocketClient m_Client;
         private ChannelAdminController m_Controller;
         private CancellationTokenSource m_Source = new CancellationTokenSource();
-        private System.Windows.Forms.Timer m_LogTimer = new System.Windows.Forms.Timer();
-        private StringBuilder m_LogString = new StringBuilder();
+        private ChannelAdminBotLog m_Log;
 
         public DiscordSocketClient Client
         {
@@ -40,9 +38,8 @@ namespace ChannelAdminBot
 
             try
             {
-                m_LogTimer.Tick += M_LogTimer_Tick;
-                m_LogTimer.Interval = 20000;
-                m_LogTimer.Start();
+                m_Log = new ChannelAdminBotLog();
+                m_Log.StartLogging();
                 //m_Client.Log += Log;
                 token = Environment.GetEnvironmentVariable("ChannelAdminBotToken", EnvironmentVariableTarget.User);
                 await Client.LoginAsync(Discord.TokenType.Bot, token);
@@ -57,28 +54,8 @@ namespace ChannelAdminBot
 Please reinstall Discord Mute Controller with the valid token!
 or update the 'ChannelAdminBotToken' environment variable with the valid token";
 
-                m_LogString.AppendLine(he.Message);
-                m_LogString.AppendLine(he.ToString());
-                writeLogStringToFile();
+                m_Log.LogLoginFailed(he);
                 MessageBox.Show(message, "Login Failed");
-            }
-        }
-
-        private void M_LogTimer_Tick(object sender, EventArgs e)
-        {
-            writeLogStringToFile();
-        }
-
-        private void writeLogStringToFile()
-        {
-            StringBuilder stringLog = new StringBuilder();
-
-            if (m_LogString.Length > 0)
-            {
-                stringLog.AppendLine(String.Format("Log dump at: {0}", DateTime.Now.ToString()));
-                stringLog.AppendLine(m_LogString.ToString());
-                File.AppendAllText("log.txt", stringLog.ToString());
-                m_LogString.Clear();
             }
         }
 
@@ -93,8 +70,7 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token";
             }
             finally
             {
-                m_LogTimer.Stop();
-                writeLogStringToFile();
+                m_Log.LogProgramEnded();
                 await Client.StopAsync();
             }
         }
@@ -113,6 +89,7 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token";
         private void initializeController()
         {
             m_Controller = new ChannelAdminController();
+            m_Log.AttachController(m_Controller);
             setGuildsComboBoxValues();
             setChannelsComboBoxValues();
             setUsersListBoxValues();
@@ -218,6 +195,7 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token";
             }
 
             m_Controller.SetGuildsComboBoxValues(comboBoxValues);
+            m_Log.LogGuildsLoaded();
         }
 
         private async void setChannelsComboBoxValues()
@@ -238,6 +216,7 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token";
             }
 
             m_Controller.SetChannelsComboBoxValues(comboBoxValues);
+            m_Log.LogChannelsLoaded();
         }
 
         private async void setUsersListBoxValues()
@@ -275,20 +254,34 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token";
             }
 
             m_Controller.SetCheckedListBoxValues(listBoxValues);
+            m_Log.LogUsersLoaded();
         }
 
-        private void setMuteStateToUserIfNeeded(IGuildUser i_User, bool i_MuteState)
+        private async void setMuteStateToUserIfNeeded(IGuildUser i_User, bool i_MuteState)
         {
+            bool taskCompleted;
+            IGuildUser userUpdatedState;
+
             if (i_User.IsMuted != i_MuteState)
             {
-                i_User.ModifyAsync(props => props.Mute = i_MuteState);
+                m_Log.LogUserMuteStateAttempted(i_User, i_MuteState);
+                await i_User.ModifyAsync(props => props.Mute = i_MuteState);
+                userUpdatedState = await i_User.VoiceChannel.GetUserAsync(i_User.Id);
+                taskCompleted = userUpdatedState.IsMuted == i_MuteState;
+                m_Log.LogUserMuteStateResult(i_User, i_MuteState, taskCompleted);
+            }
+            else
+            {
+                m_Log.LogUserMuteStateAlreadyExists(i_User, i_MuteState);
             }
         }
 
         private async void setMuteStateToAllUsers(string i_GuildName, string i_ChannelName, bool i_MuteState)
         {
+            const bool k_AllUsers = true;
             IAsyncEnumerable<IReadOnlyCollection<IGuildUser>> guildUsers = null;
 
+            m_Log.LogMassiveMuteStateAttempted(i_GuildName, i_ChannelName, i_MuteState, k_AllUsers);
             guildUsers = await getGuildChannelUsers(i_GuildName, i_ChannelName);
             if (guildUsers != null)
             {
@@ -318,9 +311,11 @@ or update the 'ChannelAdminBotToken' environment variable with the valid token";
 
         private async void setMuteStateToSelectedUsers(string i_GuildName, string i_ChannelName, List<string> i_Users, bool i_MuteState)
         {
+            bool k_AllUsers = false;
             IAsyncEnumerable<IReadOnlyCollection<IGuildUser>> guildUsers = null;
             string userNickName;
 
+            m_Log.LogMassiveMuteStateAttempted(i_GuildName, i_ChannelName, i_MuteState, k_AllUsers);
             guildUsers = await getGuildChannelUsers(i_GuildName, i_ChannelName);
             if (guildUsers != null)
             {
